@@ -9,6 +9,7 @@ const sponsors = {
     eu: ['SRL', 'PLO', 'J&K'],
     rus: ['RusAuto', 'SBO']
 };
+
 const {
     cash,
     eu,
@@ -19,12 +20,12 @@ const [firstEu, secondEu, thirdEu] = eu;
 
 function calcCash({
     own = 0,
-    cash = []
-} = {}) {
+    allCash = []
+} = {}, ...args) {
 
     let total = own;
 
-    for (let item of cash) {
+    for (let item of allCash) {
         total += +item;
     }
 
@@ -32,7 +33,7 @@ function calcCash({
 }
 
 const money = calcCash({
-    cash
+    allCash: cash
 });
 
 
@@ -41,7 +42,7 @@ function makeBusiness({
     cash = 0,
     emp = [],
     director = 'Victor'
-} = {}) {
+} = {}, ...args) {
 
     const sumSponsors = `${eu} ${rus} 'unexpected sponsor'`;
     console.log(`We have a business. Owner: ${owner}, director: ${director}. Our budget: ${cash}. And our employers: ${emp}
@@ -54,3 +55,4 @@ makeBusiness({
     cash: money,
     emp: employersNames
 })
+// так и не нашел вменяемого применения spred оператору
