@@ -1,5 +1,6 @@
 const employers = ['Alex', '', 'ludmila', 'Viktor', '', 'oleg', 'iNna', 'Ivan', 'Alex', 'Olga', ' Ann'];
 
+// применяем filter и map
 let employersNames = employers.filter((name) => name.length > 0 && name !== "");
 
 employersNames = employersNames.map((name) => name.toLowerCase());
@@ -10,13 +11,12 @@ const sponsors = {
     rus: ['RusAuto', 'SBO']
 };
 
+// деструктурируем обьект
 const {
     cash,
     eu,
     rus
 } = sponsors;
-
-const [firstEu, secondEu, thirdEu] = eu;
 
 function calcCash({
     own = 0,
@@ -32,6 +32,7 @@ function calcCash({
     return total;
 }
 
+// очень понравился паттерн, применяю на практике ))
 const money = calcCash({
     allCash: cash
 });
@@ -44,15 +45,24 @@ function makeBusiness({
     director = 'Victor'
 } = {}, ...args) {
 
-    const sumSponsors = `${eu} ${rus} 'unexpected sponsor'`;
+    // решил применить spred оператор тут, так как не могу найти более достойного применения в данном случае))
+    // деструктурирую args и забираю только первое его значение
+    const [
+        [firstEu]
+    ] = args;
+
+    // превращаем массивы в строки
+    const sumSponsors = `${eu.join(' ')} ${rus.join(' ')} 'unexpected sponsor'`;
+
+    // применяем интерполяцию и его великолепную возможность переносов ))
     console.log(`We have a business. Owner: ${owner}, director: ${director}. Our budget: ${cash}. And our employers: ${emp}
 And we have a sponsors:
 ${sumSponsors}
 Note. Be careful with ${firstEu}. It's a huge risk.`);
+
 }
 makeBusiness({
     owner: 'Sam',
     cash: money,
     emp: employersNames
-})
-// так и не нашел вменяемого применения spred оператору
+}, eu)
