@@ -5,31 +5,13 @@ const makeManey = () => {
         rus: ['RusAuto', 'SBO']
     };
 
-    const {
-        cash,
-        eu,
-        rus
-    } = sponsors;
+    const { cash, eu, rus } = sponsors;
 
-    function calcCash({
-        allCash = [],
-        own = 0
-    }) {
-
-        let total = own;
-        for (let item of allCash) {
-            total += +item;
-        }
-
-        return total;
+    const calcCash = (allCash = []) => {
+        return allCash.reduce((a, b) => a + b);
     }
 
-    const money = calcCash({
-        allCash: cash
-    });
-
-
-    return [money, eu, rus];
+    return [calcCash(cash), eu, rus];
 };
 
 export default makeManey;
