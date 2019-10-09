@@ -1,9 +1,6 @@
 const employers = ['Alex', '', 'ludmila', 'Viktor', '', 'oleg', 'iNna', 'Ivan', 'Alex', 'Olga', ' Ann'];
 
-// применяем filter и map
-let employersNames = employers.filter((name) => name.length > 0 && name !== "");
-
-employersNames = employersNames.map((name) => name.toLowerCase());
+const employersNames = employers.filter((name) => name !== "").map((name) => name.toLowerCase().trim());
 
 const sponsors = {
     cash: [40000, 5000, 30400, 12000],
@@ -11,58 +8,22 @@ const sponsors = {
     rus: ['RusAuto', 'SBO']
 };
 
-// деструктурируем обьект
-const {
-    cash,
-    eu,
-    rus
-} = sponsors;
+const { cash, eu, rus } = sponsors;
 
-function calcCash({
-    own = 0,
-    allCash = []
-} = {}, ...args) {
-
-    let total = own;
-
-    for (let item of allCash) {
-        total += +item;
-    }
-
-    return total;
+const calcCash = (allCash = []) => {
+    return allCash.reduce((a, b) => a + b);
 }
-
-// очень понравился паттерн, применяю на практике ))
-const money = calcCash({
-    allCash: cash
-});
+const money = calcCash(cash);
 
 
-function makeBusiness({
-    owner = 'default',
-    cash = 0,
-    emp = [],
-    director = 'Victor'
-} = {}, ...args) {
+const makeBusiness = ({ owner = 'default', cash = 0, emp = [], director = 'Victor' } = {}, ...args) => {
 
-    // решил применить spred оператор тут, так как не могу найти более достойного применения в данном случае))
-    // деструктурирую args и забираю только первое его значение
-    const [
-        [firstEu]
-    ] = args;
+    const [[firstEu]] = args;
 
-    // превращаем массивы в строки
-    const sumSponsors = `${eu.join(' ')} ${rus.join(' ')} 'unexpected sponsor'`;
-
-    // применяем интерполяцию и его великолепную возможность переносов ))
-    console.log(`We have a business. Owner: ${owner}, director: ${director}. Our budget: ${cash}. And our employers: ${emp}
-And we have a sponsors:
-${sumSponsors}
-Note. Be careful with ${firstEu}. It's a huge risk.`);
-
+    console.log(`We have a business. Owner: ${owner}, director: ${director}. Our budget: ${cash}. And our employers: ${emp}`);
+    console.log(`And we have a sponsors:`);
+    console.log(`${eu.join(' ')} ${rus.join(' ')} 'unexpected sponsor'`);
+    console.log(`Note. Be careful with ${firstEu}. It's a huge risk.`);
 }
-makeBusiness({
-    owner: 'Sam',
-    cash: money,
-    emp: employersNames
-}, eu)
+makeBusiness({ owner: 'Sam', cash: money, emp: employersNames }, eu);
+
