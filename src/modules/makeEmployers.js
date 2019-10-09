@@ -24,14 +24,9 @@ function () {
     key: "filterNames",
     value: function filterNames() {
       return this.employers.filter(function (name) {
-        return name.length > 0 && name !== "";
-      });
-    }
-  }, {
-    key: "lowerCaseNames",
-    value: function lowerCaseNames() {
-      return this.filterNames().map(function (name) {
-        return " ".concat(name.toLowerCase());
+        return name !== "";
+      }).map(function (name) {
+        return name.toLowerCase().trim();
       });
     }
   }]);

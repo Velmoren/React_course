@@ -3,10 +3,7 @@ class MakeEmployers {
         this.employers = employers;
     }
     filterNames() {
-        return this.employers.filter((name) => name.length > 0 && name !== "");
-    }
-    lowerCaseNames() {
-        return this.filterNames().map((name) => ` ${name.toLowerCase()}`);
+        return this.employers.filter((name) => name !== "").map((name) => name.toLowerCase().trim());
     }
 }
 

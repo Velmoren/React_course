@@ -31,8 +31,8 @@ function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) ||
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var makeEmployers = new _makeEmployers.default(['Alex', '', 'ludmila', 'Viktor', '', 'oleg', 'iNna', 'Ivan', 'Alex', 'Olga', ' Ann']);
-var employersNames = makeEmployers.lowerCaseNames();
-var makeManey = new _makeManey.default([40000, 5000, 30400, 12000], ['SRL', 'PLO', 'J&K'], ['RusAuto', 'SBO']); // деструктурирую полученный массив данных
+var employersNames = makeEmployers.filterNames();
+var makeManey = new _makeManey.default([40000, 5000, 30400, 12000], ['SRL', 'PLO', 'J&K'], ['RusAuto', 'SBO']);
 
 var _makeManey$returnResu = makeManey.returnResult(),
     _makeManey$returnResu2 = _slicedToArray(_makeManey$returnResu, 3),
@@ -71,7 +71,6 @@ function () {
   _createClass(MakeBusiness, [{
     key: "makeFirstEuNames",
     value: function makeFirstEuNames() {
-      // деструктурирую this.args
       var _this$args = _slicedToArray(this.args, 1),
           _this$args$ = _slicedToArray(_this$args[0], 1),
           firstEu = _this$args$[0];
@@ -79,17 +78,11 @@ function () {
       return firstEu;
     }
   }, {
-    key: "makeSunSponsors",
-    value: function makeSunSponsors() {
-      return "".concat(eu.join(' '), " ").concat(rus.join(' '), " 'unexpected sponsor'");
-    }
-  }, {
     key: "makeLog",
     value: function makeLog() {
-      // можно было и в одну строку, но так красивее код))
       console.log("We have a business. Owner: ".concat(this.owner, ", director: ").concat(this.director, ". Our budget: ").concat(this.cash, ". And our employers:").concat(this.emp));
       console.log("And we have a sponsors:");
-      console.log("".concat(this.makeSunSponsors()));
+      console.log("".concat(eu.join(' '), " ").concat(rus.join(' '), " 'unexpected sponsor'"));
       console.log("Note. Be careful with ".concat(this.makeFirstEuNames(), ". It's a huge risk"));
     }
   }]);
