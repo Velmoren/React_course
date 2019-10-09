@@ -30,6 +30,16 @@ require("core-js/modules/es6.symbol");
 
 require("core-js/modules/web.dom.iterable");
 
+require("core-js/modules/es6.regexp.to-string");
+
+require("core-js/modules/es6.object.to-string");
+
+require("core-js/modules/es7.symbol.async-iterator");
+
+require("core-js/modules/es6.symbol");
+
+require("core-js/modules/web.dom.iterable");
+
 var _makeEmployers = _interopRequireDefault(require("./modules/makeEmployers"));
 
 var _makeManey3 = _interopRequireDefault(require("./modules/makeManey"));
