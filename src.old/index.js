@@ -1,11 +1,13 @@
-import makeEmployers from './modules/makeEmployers'
-import makeManey from './modules/makeManey'
+import MakeEmployers from './modules/makeEmployers'
+import MakeManey from './modules/makeManey'
 
-const employersNames = makeEmployers();
+
+const makeEmployers = new MakeEmployers(['Alex', '', 'ludmila', 'Viktor', '', 'oleg', 'iNna', 'Ivan', 'Alex', 'Olga', ' Ann']);
+const employersNames = makeEmployers.lowerCaseNames();
+
+const makeManey = new MakeManey([40000, 5000, 30400, 12000], ['SRL', 'PLO', 'J&K'], ['RusAuto', 'SBO']);
 // деструктурирую полученный массив данных
-const [money, eu, rus] = makeManey();
-
-
+const [money, eu, rus] = makeManey.returnResult();
 
 class MakeBusiness {
     constructor({

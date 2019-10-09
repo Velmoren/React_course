@@ -1,25 +1,43 @@
-// const makeEmployers = () => {
-//     const employers = ['Alex', '', 'ludmila', 'Viktor', '', 'oleg', 'iNna', 'Ivan', 'Alex', 'Olga', ' Ann'];
+"use strict";
 
-//     // применяем filter и map
-//     let employersNames = employers.filter((name) => name.length > 0 && name !== "");
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
 
-//     employersNames = employersNames.map((name) => ` ${name.toLowerCase()}`);
-//     return employersNames;
-// };
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-// export default makeEmployers;
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-class MakeEmployers {
-    constructor(employers) {
-        this.employers = employers;
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var MakeEmployers =
+/*#__PURE__*/
+function () {
+  function MakeEmployers(employers) {
+    _classCallCheck(this, MakeEmployers);
+
+    this.employers = employers;
+  }
+
+  _createClass(MakeEmployers, [{
+    key: "filterNames",
+    value: function filterNames() {
+      return this.employers.filter(function (name) {
+        return name.length > 0 && name !== "";
+      });
     }
-    filterNames() {
-        return this.employers.filter((name) => name.length > 0 && name !== "");
+  }, {
+    key: "lowerCaseNames",
+    value: function lowerCaseNames() {
+      return this.filterNames().map(function (name) {
+        return " ".concat(name.toLowerCase());
+      });
     }
-    lowerCaseNames() {
-        return this.filterNames().map((name) => ` ${name.toLowerCase()}`);
-    }
-}
+  }]);
 
-export default MakeEmployers;
+  return MakeEmployers;
+}();
+
+var _default = MakeEmployers;
+exports.default = _default;
