@@ -1,10 +1,10 @@
 {
   "name": "react_course",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "dev"
+    "dev": "webpack-dev-server --open --mode=development",
+    "build": "webpack --mode=production"
   },
   "repository": {
     "type": "git",
@@ -20,9 +20,17 @@
   },
   "homepage": "https://github.com/Velmoren/React_course#readme",
   "devDependencies": {
-    "eslint-plugin-babel": "^5.3.0"
+    "@babel/cli": "^7.6.3",
+    "@babel/core": "^7.6.3",
+    "@babel/preset-env": "^7.6.3",
+    "babel-loader": "^8.0.6",
+    "eslint-plugin-babel": "^5.3.0",
+    "webpack": "^4.41.0",
+    "webpack-cli": "^3.3.9"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.6.0",
     "eslint-plugin-react": "^7.16.0"
-  }
+  },
+  "description": ""
 }
