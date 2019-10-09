@@ -1,36 +1,64 @@
-const makeManey = () => {
-    const sponsors = {
-        cash: [40000, 5000, 30400, 12000],
-        eu: ['SRL', 'PLO', 'J&K'],
-        rus: ['RusAuto', 'SBO']
-    };
+"use strict";
 
-    const {
-        cash,
-        eu,
-        rus
-    } = sponsors;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
 
-    function calcCash({
-        allCash = [],
-        own = 0
-    }) {
+require("core-js/modules/es7.symbol.async-iterator");
 
-        let total = own;
+require("core-js/modules/es6.symbol");
 
-        allCash.forEach((item) => {
-            total += +item;
-        });
+require("core-js/modules/web.dom.iterable");
 
-        return total;
+var makeManey = function makeManey() {
+  var sponsors = {
+    cash: [40000, 5000, 30400, 12000],
+    eu: ['SRL', 'PLO', 'J&K'],
+    rus: ['RusAuto', 'SBO']
+  };
+  var cash = sponsors.cash,
+      eu = sponsors.eu,
+      rus = sponsors.rus;
+
+  function calcCash(_ref) {
+    var _ref$allCash = _ref.allCash,
+        allCash = _ref$allCash === void 0 ? [] : _ref$allCash,
+        _ref$own = _ref.own,
+        own = _ref$own === void 0 ? 0 : _ref$own;
+    var total = own;
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+      for (var _iterator = allCash[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        var item = _step.value;
+        total += +item;
+      }
+    } catch (err) {
+      _didIteratorError = true;
+      _iteratorError = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion && _iterator.return != null) {
+          _iterator.return();
+        }
+      } finally {
+        if (_didIteratorError) {
+          throw _iteratorError;
+        }
+      }
     }
 
-    const money = calcCash({
-        allCash: cash
-    });
+    return total;
+  }
 
-
-    return [money, eu, rus];
+  var money = calcCash({
+    allCash: cash
+  });
+  return [money, eu, rus];
 };
 
-export default makeManey;
+var _default = makeManey;
+exports.default = _default;
