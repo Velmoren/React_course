@@ -1,9 +1,12 @@
 import React from "react";
 
 const PostListItem = () => {
+    const date = new Date().toLocaleString("ru");
+
     return (
         <li className="app-list-item d-flex justify-content-between">
             <span className="app-list-item-label">Hello World!</span>
+            <span className="post-list-item-date">{date}</span>
             <div className="d-flex justify-content-center align-items-center"> 
                 <button 
                     type="button" 
