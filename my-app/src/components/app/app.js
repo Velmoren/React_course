@@ -9,6 +9,16 @@ import PostAddForm from '../post-add-form';
 import './app.css'
 
 const App = () => {
+
+  const dataFromServer = [
+    {label: 'Going to learn React', important: false, id: 'weee'},
+    {label: 'That is so good', important: false, id: 'weer'},
+    {label: 'I need a breack...', important: false, id: 'weet'}
+  ];
+
+  // фильтруем данные от сервера
+  const data = dataFromServer.filter((elem) => typeof(elem) === 'object');
+
     return (
        <div className="app">
             <AppHeader />
@@ -16,7 +26,7 @@ const App = () => {
               <SaerchPanel/>
               <PostStatusFilter/>
             </div>
-            <PostList/>
+            <PostList posts={data}/>
             <PostAddForm/>
        </div>
     )

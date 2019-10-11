@@ -52,3 +52,7 @@
 .app-list-item.important .btn-star {
     color: #aeaeae;
 }
+
+.post-list-item-date {
+  font-size: 12px;
+}
