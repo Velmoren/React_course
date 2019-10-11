@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 
 import './post-list-item.css';
-
+// подготовка
 export default class PostListItem extends Component {
     state = {
         important: false,
