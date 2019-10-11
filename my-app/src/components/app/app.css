@@ -1,8 +1,4 @@
-@import "../../css/app-header.css";
-@import "../../css/index.css";
-@import "../../css/app.css";
-@import "../../css/post-add-form.css";
-@import "../../css/post-list-item.css";
-@import "../../css/post-list.css";
-@import "../../css/post-status-filter.css";
-@import "../../css/search-panel.css";
+.app {
+  margin: 0 auto;
+  max-width: 800px;
+}
