@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import nextId from "react-id-generator";
 
 import AppHeader from '../app-header';
 import SaerchPanel from '../search-panel';
@@ -24,9 +25,9 @@ export default class App extends Component {
 
   state = {
     dataFromServer: [
-      { label: 'Going to learn React', important: false, id: 'weee' },
-      { label: 'That is so good', important: false, id: 'weer' },
-      { label: 'I need a breack...', important: false, id: 'weet' }
+      { label: 'Going to learn React', important: false, id: 1 },
+      { label: 'That is so good', important: false, id: 2 },
+      { label: 'I need a breack...', important: false, id: 3 }
     ]
   }
   filterData = () => {
@@ -39,7 +40,6 @@ export default class App extends Component {
 
       const before = dataFromServer.slice(0, index);
       const after = dataFromServer.slice(index + 1);
-      console.log(before);
 
       const newArr = [...before, ...after];
 
@@ -50,8 +50,18 @@ export default class App extends Component {
   }
 
   addItem = (body) => {
-    console.log(body);
+    const newItem = {
+      label: body,
+      important: false,
+      id: nextId()
+    }
 
+    this.setState(({ dataFromServer }) => {
+      const newArr = [...dataFromServer, newItem];
+      return {
+        dataFromServer: newArr
+      }
+    })
   }
 
   editItem = (body, id) => {

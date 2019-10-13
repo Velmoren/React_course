@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Button, Form, Input } from 'reactstrap';
 
 import './post-list-item-edit.css';
 
@@ -15,7 +16,6 @@ export default class PostListItemEdit extends Component {
     }
     render() {
         const { edit, onEdit } = this.props;
-        console.log(edit);
 
         edit ? this.classVisible = ' d-flex' : this.classVisible = ' d-none'
 
@@ -23,21 +23,23 @@ export default class PostListItemEdit extends Component {
 
         return (
 
-            <form className={classNames}>
-                <input
+            <Form className={classNames}>
+                <Input
                     type="text"
-                    className="form-control edit-post-label"
+                    className="edit-post-label"
                     placeholder={this.props.label}
                 />
-                <button
+                <Button
+                    outline
+                    color="secondary"
                     type="button"
                     onClick={() => {
                         onEdit(document.querySelector('.edit-post-label').value);
                     }}
                     className="btn btn-outline-secondary btn-edit-post">
                     Изменить
-                </button>
-            </form>
+                </Button>
+            </Form>
         )
     }
 }
