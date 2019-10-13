@@ -20,7 +20,6 @@ export default class PostListItemEdit extends Component {
         edit ? this.classVisible = ' d-flex' : this.classVisible = ' d-none'
 
         let classNames = 'botoom-panel' + this.classVisible;
-
         return (
 
             <Form className={classNames}>

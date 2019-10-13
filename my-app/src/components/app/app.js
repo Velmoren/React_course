@@ -25,9 +25,9 @@ export default class App extends Component {
 
   state = {
     dataFromServer: [
-      { label: 'Going to learn React', important: false, id: 1 },
-      { label: 'That is so good', important: false, id: 2 },
-      { label: 'I need a breack...', important: false, id: 3 }
+      { label: 'Going to learn React', important: false, id: nextId() },
+      { label: 'That is so good', important: false, id: nextId() },
+      { label: 'I need a breack...', important: false, id: nextId() }
     ]
   }
   filterData = () => {
@@ -50,6 +50,7 @@ export default class App extends Component {
   }
 
   addItem = (body) => {
+
     const newItem = {
       label: body,
       important: false,
@@ -65,10 +66,13 @@ export default class App extends Component {
   }
 
   editItem = (body, id) => {
+
     this.setState(({ dataFromServer }) => {
       const newArr = [];
       for (let elem of dataFromServer) {
+
         if (elem.id === id && body !== '') {
+
           elem.label = body
         }
         newArr.push(elem);
@@ -89,7 +93,7 @@ export default class App extends Component {
           <PostStatusFilter />
         </div>
         <PostList
-          posts={this.filterData()}
+          posts={this.state.dataFromServer}
           onDelete={this.deleteItem}
           onEdit={this.editItem} />
         <PostAddForm
