@@ -2,11 +2,8 @@ import React, { Component } from "react";
 import PostListItemEdit from "../post-list-item-edit";
 
 import './post-list-item.css';
-// подготовка
 export default class PostListItem extends Component {
     state = {
-        important: false,
-        like: false,
         edit: false,
         visible: false
     }
@@ -27,8 +24,7 @@ export default class PostListItem extends Component {
     }
 
     render = () => {
-        const { label, onDelete, onEdit } = this.props;
-        const { important, like } = this.state;
+        const { important, like, label, onDelete, onEdit, onToggleImportant, onToggleLiked } = this.props;
         const date = new Date().toLocaleString("ru");
 
         let classNames = 'app-list-item d-flex justify-content-between';
@@ -41,7 +37,7 @@ export default class PostListItem extends Component {
                 <div className={classNames}>
                     <span
                         className="app-list-item-label"
-                        onClick={this.onLike}>
+                        onClick={onToggleLiked}>
                         {label}
                     </span>
                     <div className="d-flex flex-column">
@@ -49,7 +45,7 @@ export default class PostListItem extends Component {
                             <button
                                 type="button"
                                 className="btn-star btn-sm"
-                                onClick={this.onImportant}>
+                                onClick={onToggleImportant}>
                                 <i className="fa fa-star"></i>
                             </button>
                             <button

@@ -3,19 +3,27 @@ import { ListGroup, ListGroupItem } from 'reactstrap';
 import PostListItem from '../post-list-item'
 
 
-import './post-list.css';
+// import './post-list.css';
+import styled from 'styled-components';
 
-const PostList = ({ posts, onDelete, onEdit }) => {
+const StyleListGroup = styled(ListGroup)`
+    margin-top: 50px;
+`
+
+const PostList = ({ posts, onDelete, onEdit, onToggleImportant, onToggleLiked }) => {
 
     const elements = posts.map((item) => {
 
         const { id, ...itemProps } = item;
+
         return (
             <ListGroupItem key={id}>
                 <PostListItem
                     {...itemProps}
                     onDelete={() => onDelete(id)}
                     onEdit={(body) => onEdit(body, id)}
+                    onToggleImportant={() => onToggleImportant(id)}
+                    onToggleLiked={() => onToggleLiked(id)}
                 />
             </ListGroupItem>
         )
@@ -23,9 +31,9 @@ const PostList = ({ posts, onDelete, onEdit }) => {
 
     return (
         <>
-            <ListGroup className="app-list">
+            <StyleListGroup className="app-list">
                 {elements}
-            </ListGroup>
+            </StyleListGroup>
         </>
     )
 }

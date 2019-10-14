@@ -20,11 +20,35 @@ const Header = styled.div`
     }
 `
 
-const AppHeader = () => {
+const AppHeader = ({ liked, allPosts }) => {
+    // логика такая: проверяем последний символ количество постов и в зависимости от него формируем title
+    let title = '';
+    let lastNumberOfAllPosts = +(String(allPosts).substring(String(allPosts).length - 1, String(allPosts).length));
+    console.log(lastNumberOfAllPosts);
+
+    switch (lastNumberOfAllPosts) {
+        case 1:
+            title = 'запись';
+            break;
+        case 2:
+        case 3:
+        case 4:
+            title = 'записи';
+            break;
+
+        default:
+            title = 'записей';
+            break;
+    }
+    // весь первый десяток - исключение
+    if (+(String(allPosts).substring(0, 1)) === 1 && String(allPosts).length === 2) title = 'записей';
+
+
+
     return (
         <Header colored as='a'>
             <h1>Alex Ilyasov</h1>
-            <h2>5 записей, из них понравилось 0</h2>
+            <h2>{allPosts} {title}, из них понравилось {liked}</h2>
         </Header>
     )
 }
