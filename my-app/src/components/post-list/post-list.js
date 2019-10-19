@@ -10,7 +10,7 @@ const StyleListGroup = styled(ListGroup)`
     margin-top: 50px;
 `
 
-const PostList = ({ posts, onDelete, onEdit, onToggleImportant, onToggleLiked }) => {
+const PostList = ({ posts, onDelete, onEdit, onToggleImportant, onToggleLiked, id }) => {
 
     const elements = posts.map((item) => {
 
@@ -24,6 +24,7 @@ const PostList = ({ posts, onDelete, onEdit, onToggleImportant, onToggleLiked })
                     onEdit={(body) => onEdit(body, id)}
                     onToggleImportant={() => onToggleImportant(id)}
                     onToggleLiked={() => onToggleLiked(id)}
+                    id={id}
                 />
             </ListGroupItem>
         )

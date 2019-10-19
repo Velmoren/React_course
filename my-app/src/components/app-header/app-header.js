@@ -24,7 +24,6 @@ const AppHeader = ({ liked, allPosts }) => {
     // логика такая: проверяем последний символ количество постов и в зависимости от него формируем title
     let title = '';
     let lastNumberOfAllPosts = +(String(allPosts).substring(String(allPosts).length - 1, String(allPosts).length));
-    console.log(lastNumberOfAllPosts);
 
     switch (lastNumberOfAllPosts) {
         case 1:

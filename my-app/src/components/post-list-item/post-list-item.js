@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import PostListItemEdit from "../post-list-item-edit";
+// import PostListItemEdit from "../post-list-item-edit";
+import EditItem from '../editItem'
 
 import './post-list-item.css';
 export default class PostListItem extends Component {
     state = {
-        edit: false,
         visible: false
     }
     onImportant = () => {
@@ -17,20 +17,28 @@ export default class PostListItem extends Component {
             like: !like
         }))
     }
-    onVisible = () => {
+    onEdit = () => {
         this.setState(({ visible }) => ({
             visible: !visible
         }))
     }
-
+    onChange = (body) => {
+        this.onEdit()
+        this.props.onEdit(body)
+    }
     render = () => {
-        const { important, like, label, onDelete, onEdit, onToggleImportant, onToggleLiked } = this.props;
+        const { important, like, label, onDelete, onToggleImportant, onToggleLiked } = this.props;
+
+        const { visible } = this.state;
+
         const date = new Date().toLocaleString("ru");
 
         let classNames = 'app-list-item d-flex justify-content-between';
 
         if (important) classNames += ' important';
         if (like) classNames += ' like';
+
+        const editForm = visible ? <EditItem label={label} onChange={this.onChange} /> : null;
 
         return (
             <>
@@ -57,7 +65,7 @@ export default class PostListItem extends Component {
                             <button
                                 type="button"
                                 className="btn-edit btn-sm"
-                                onClick={this.onVisible}
+                                onClick={this.onEdit}
                             >
                                 <i className="fa fa-pencil-square-o"></i>
                             </button>
@@ -66,7 +74,7 @@ export default class PostListItem extends Component {
                         <span className="post-list-item-date align-self-start">{date}</span>
                     </div>
                 </div>
-                <PostListItemEdit edit={this.state.visible} label={label} onEdit={(body) => onEdit(body)} />
+                {editForm}
             </>
         )
     }

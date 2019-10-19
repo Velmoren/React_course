@@ -65,21 +65,7 @@ export default class App extends Component {
   }
 
   editItem = (body, id) => {
-    this.setState(({ dataFromServer }) => {
-      const index = dataFromServer.findIndex(elem => elem.id === id);
-
-      const old = dataFromServer[index];
-      const newItem = { ...old, label: body }
-
-      const before = dataFromServer.slice(0, index);
-      const after = dataFromServer.slice(index + 1);
-
-      const newArr = [...before, newItem, ...after];
-
-      return {
-        dataFromServer: newArr
-      }
-    })
+    this.onToggleEdit(id, 'edit', body)
   }
   onToggleImportant = (id) => {
     this.onToggleEdit(id, 'important')
@@ -88,7 +74,7 @@ export default class App extends Component {
     this.onToggleEdit(id, 'like')
   }
 
-  onToggleEdit = (id, idea) => {
+  onToggleEdit = (id, idea, body) => {
     this.setState(({ dataFromServer }) => {
       const index = dataFromServer.findIndex(elem => elem.id === id);
 
@@ -96,6 +82,7 @@ export default class App extends Component {
       let newItem = {};
       if (idea === 'like') newItem = { ...old, like: !old.like }
       if (idea === 'important') newItem = { ...old, important: !old.important }
+      if (idea === 'edit') newItem = { ...old, label: body }
 
       const before = dataFromServer.slice(0, index);
       const after = dataFromServer.slice(index + 1);
@@ -134,7 +121,8 @@ export default class App extends Component {
   render() {
     const { term, filter } = this.state;
 
-    const data = this.state.dataFromServer.filter(item => typeof (item) === 'object');
+    const data = this.state.dataFromServer.filter(item => typeof (item) === 'object' && item.label && item.id);
+
     const liked = data.filter(item => item.like).length;
     const allPosts = data.length;
 
