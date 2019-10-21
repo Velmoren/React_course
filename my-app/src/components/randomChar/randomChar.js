@@ -21,11 +21,6 @@ const Term = styled.span`
 `
 
 export default class RandomChar extends Component {
-    constructor() {
-        super();
-        // когда будет создан наш класс будет вызван метод и запустит код
-        this.updateChar();
-    }
 
     gotService = new GotService();
 
@@ -33,6 +28,15 @@ export default class RandomChar extends Component {
         char: {},
         loading: true,
         error: false
+    }
+
+    componentDidMount() {
+        this.updateChar();
+        this.timerId = setInterval(this.updateChar, 1500);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timerId);
     }
 
     onCharLoaded = (char) => {
@@ -49,7 +53,7 @@ export default class RandomChar extends Component {
         })
     }
 
-    updateChar() {
+    updateChar = () => {
         const id = Math.floor(Math.random() * 140 + 25); // диапазон от 25 до 140
         // const id = 100000000;
         this.gotService.getCharacter(id)
@@ -58,7 +62,6 @@ export default class RandomChar extends Component {
     }
 
     render() {
-
         const { char, loading, error } = this.state;
 
         const errorMessage = error ? <ErrorMessage /> : null;

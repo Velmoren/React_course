@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Col, Row, Container, Button } from 'reactstrap';
 import Header from '../header';
 import RandomChar from '../randomChar';
-import ItemList from '../itemList';
-import CharDetails from '../charDetails';
 import GotService from '../../services/gotService';
+import ErrorMessage from '../errorMessage';
+import CharacterPage from '../characterPage'
 
 import styled from 'styled-components';
 
@@ -14,8 +14,16 @@ const StdButton = styled(Button)`
 
 export default class App extends Component {
     state = {
-        randomCharWindow: true
+        randomCharWindow: true,
+        error: false
     }
+
+    componentDidCatch() {
+        this.setState({
+            error: true
+        })
+    }
+
     async consoleOutput() {
         const got = new GotService();
 
@@ -47,12 +55,16 @@ export default class App extends Component {
             randomCharWindow: !randomCharWindow
         }))
     }
+
     render() {
 
-        this.consoleOutput();
+        // this.consoleOutput();
 
         const viewRandomChar = this.state.randomCharWindow ? <RandomChar /> : null;
         const buttonText = this.state.randomCharWindow ? 'Скрыть RandomChar' : 'Показать RandomChar'
+        if (this.state.error) {
+            return <ErrorMessage />
+        }
 
         return (
             <>
@@ -66,14 +78,9 @@ export default class App extends Component {
                             <StdButton onClick={this.openRandomChar}>{buttonText}</StdButton>
                         </Col>
                     </Row>
-                    <Row>
-                        <Col md='6'>
-                            <ItemList />
-                        </Col>
-                        <Col md='6'>
-                            <CharDetails />
-                        </Col>
-                    </Row>
+                    <CharacterPage />
+                    {/* <CharacterPage />
+                    <CharacterPage /> */}
                 </Container>
             </>
         );

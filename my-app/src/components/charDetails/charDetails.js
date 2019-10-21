@@ -1,4 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import Spinner from '../spinner';
+import ErrorMessage from '../errorMessage';
+
+import GotService from '../../services/gotService'
+
 import styled from 'styled-components';
 
 const HeaderBlock = styled.div`
@@ -11,7 +16,7 @@ const HeadingFourth = styled.h4`
     text-align: center;
 `
 
-// const SelectError = styled.div`
+// const SelectError = styled.span`
 //     color: #fff;
 //     text-align: center;
 //     font-size: 26px;
@@ -20,29 +25,93 @@ const HeadingFourth = styled.h4`
 
 export default class CharDetails extends Component {
 
+    gotService = new GotService();
+
+    state = {
+        char: {},
+        loading: true,
+        error: false
+    }
+
+    componentDidMount() {
+        setTimeout(() => {
+            this.setState({
+                loading: false
+            })
+            this.updateChar();
+        }, 500);
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.charId !== prevProps.charId) {
+            this.updateChar();
+        }
+    }
+    onError = (err) => {
+        this.setState({
+            error: true,
+            loading: false
+        })
+    }
+    updateChar() {
+
+        const { charId } = this.props;
+        if (!charId) {
+            return
+        }
+
+        this.gotService.getCharacter(charId)
+            .then((char) => {
+                this.setState({ char })
+            })
+            .catch(this.onError)
+        // this.foo.bar = 0;
+    }
+
     render() {
+        const { char, loading, error } = this.state;
+
+        const errorMessage = error ? <ErrorMessage /> : null;
+        const spinner = loading ? <Spinner /> : null;
+        const content = !(loading || error) ? <ViewDetail char={char} /> : null;
+
+
+
         return (
             <HeaderBlock className="rounded">
-                <HeadingFourth>John Snow</HeadingFourth>
-                <ul className="list-group list-group-flush">
-                    <li className="list-group-item d-flex justify-content-between">
-                        <span className="term">Gender</span>
-                        <span>male</span>
-                    </li>
-                    <li className="list-group-item d-flex justify-content-between">
-                        <span className="term">Born</span>
-                        <span>1783</span>
-                    </li>
-                    <li className="list-group-item d-flex justify-content-between">
-                        <span className="term">Died</span>
-                        <span>1820</span>
-                    </li>
-                    <li className="list-group-item d-flex justify-content-between">
-                        <span className="term">Culture</span>
-                        <span>First</span>
-                    </li>
-                </ul>
-            </HeaderBlock>
+                {errorMessage}
+                {spinner}
+                {content}
+            </HeaderBlock >
         );
     }
+}
+
+const ViewDetail = ({ char }) => {
+
+    const { name, gender, born, died, culture } = char
+
+    return (
+        <>
+            <HeadingFourth>{name}</HeadingFourth>
+            <ul className="list-group list-group-flush">
+                <li className="list-group-item d-flex justify-content-between">
+                    <span className="term">Gender</span>
+                    <span>{gender}</span>
+                </li>
+                <li className="list-group-item d-flex justify-content-between">
+                    <span className="term">Born</span>
+                    <span>{born}</span>
+                </li>
+                <li className="list-group-item d-flex justify-content-between">
+                    <span className="term">Died</span>
+                    <span>{died}</span>
+                </li>
+                <li className="list-group-item d-flex justify-content-between">
+                    <span className="term">Culture</span>
+                    <span>{culture}</span>
+                </li>
+            </ul>
+        </>
+    )
 }

@@ -20,7 +20,8 @@ export default class GotService {
 
     // ?page=5&pageSize=10  - настройки сортировки
     async getAllCharacters() {
-        const res = await this.getResource('/characters?page=5&pageSize=1000')
+        const res = await this.getResource('/characters?page=5&pageSize=10')
+
         return res.map(this._transformCharacter)
     }
 
@@ -58,7 +59,8 @@ export default class GotService {
             gender: char.gender,
             born: char.born,
             died: char.died,
-            culture: char.culture
+            culture: char.culture,
+            url: char.url.replace(/\D/g, '')
         }
     }
 
