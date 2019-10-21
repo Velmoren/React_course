@@ -52,6 +52,7 @@ export default class App extends Component {
         this.consoleOutput();
 
         const viewRandomChar = this.state.randomCharWindow ? <RandomChar /> : null;
+        const buttonText = this.state.randomCharWindow ? 'Скрыть RandomChar' : 'Показать RandomChar'
 
         return (
             <>
@@ -62,7 +63,7 @@ export default class App extends Component {
                     <Row>
                         <Col lg={{ size: 5, offset: 0 }}>
                             {viewRandomChar}
-                            <StdButton onClick={this.openRandomChar}>Скрыть RandomChar</StdButton>
+                            <StdButton onClick={this.openRandomChar}>{buttonText}</StdButton>
                         </Col>
                     </Row>
                     <Row>
