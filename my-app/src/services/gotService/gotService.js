@@ -13,44 +13,44 @@ export default class GotService {
         return await res.json();
     }
 
-    async getRoot() {
+    getRoot = async () => {
         const root = await this.getResource('')
         return this._transformRoot(root)
     }
 
     // ?page=5&pageSize=10  - настройки сортировки
-    async getAllCharacters() {
+    getAllCharacters = async () => {
         const res = await this.getResource('/characters?page=5&pageSize=10')
 
         return res.map(this._transformCharacter)
     }
 
-    async getCharacter(id) {
+    getCharacter = async (id) => {
         const character = await this.getResource(`/characters/${id}`);
         return this._transformCharacter(character);
     }
 
-    async getAllHouses() {
-        const res = await this.getResource('/houses?pageSize=1000')
+    getAllHouses = async () => {
+        const res = await this.getResource('/houses?page=6&pageSize=10')
         return res.map(this._transformHouse)
     }
 
-    async getHouse(id) {
+    getHouse = async (id) => {
         const houses = await this.getResource(`/houses/${id}`);
         return this._transformHouse(houses)
     }
 
-    async getAllBooks() {
-        const res = await this.getResource('/books?pageSize=1000')
+    getAllBooks = async () => {
+        const res = await this.getResource('/books?pageSize=10')
         return res.map(this._transformBooks)
     }
 
-    async getBook(id) {
+    getBook = async (id) => {
         const book = await this.getResource(`/books/${id}`);
         return this._transformBooks(book)
     }
 
-    _transformCharacter(char) {
+    _transformCharacter = (char) => {
         for (let elem in char) {
             if (char[elem] === '') char[elem] = 'No information'
         }
@@ -60,11 +60,11 @@ export default class GotService {
             born: char.born,
             died: char.died,
             culture: char.culture,
-            url: char.url.replace(/\D/g, '')
+            id: char.url.replace(/\D/g, '')
         }
     }
 
-    _transformHouse(house) {
+    _transformHouse = (house) => {
         for (let elem in house) {
             if (house[elem] === '') house[elem] = 'No information'
         }
@@ -74,24 +74,25 @@ export default class GotService {
             words: house.words,
             titles: house.titles,
             overlord: house.overlord,
-            ancestralWeapons: house.ancestralWeapons
+            ancestralWeapons: house.ancestralWeapons,
+            id: house.url.replace(/\D/g, '')
         }
     }
 
-    _transformBooks(books) {
+    _transformBooks = (books) => {
         for (let elem in books) {
             if (books[elem] === '') books[elem] = 'No information'
         }
         return {
-            url: books.url,
             name: books.name,
             isbn: books.isbn,
             authors: books.authors,
-            numberOfPages: books.numberOfPages
+            numberOfPages: books.numberOfPages,
+            id: books.url.replace(/\D/g, '')
         }
     }
 
-    _transformRoot(root) {
+    _transformRoot = (root) => {
         for (let elem in root) {
             if (root[elem] === '') root[elem] = 'No information'
         }
@@ -103,7 +104,7 @@ export default class GotService {
         }
     }
 
-    _transformText(myObj) {
+    _transformText = (myObj) => {
         for (let elem in myObj) {
             if (myObj[elem] === '') myObj[elem] = 'No information'
         }

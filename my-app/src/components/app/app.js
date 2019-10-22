@@ -1,70 +1,44 @@
 import React, { Component } from 'react';
-import { Col, Row, Container, Button } from 'reactstrap';
+import { Container } from 'reactstrap';
 import Header from '../header';
-import RandomChar from '../randomChar';
 import GotService from '../../services/gotService';
-import ErrorMessage from '../errorMessage';
-import CharacterPage from '../characterPage'
-
-import styled from 'styled-components';
-
-const StdButton = styled(Button)`
-    margin-bottom: 20px;
-`
+import CharacterPage from '../pages/characterPage'
+import HousePage from '../pages/housePage'
+import BookPage from '../pages/bookPage'
+import RandomItem from '../randomModule/randomItem'
 
 export default class App extends Component {
-    state = {
-        randomCharWindow: true,
-        error: false
-    }
 
-    componentDidCatch() {
-        this.setState({
-            error: true
-        })
-    }
+    gotService = new GotService();
 
     async consoleOutput() {
-        const got = new GotService();
 
-        await got.getRoot()
+        await this.gotService.getRoot()
             .then(res => console.log('Root', res));
 
-        await got.getAllBooks()
+        await this.gotService.getAllBooks()
             .then(res => console.log('AllBooks', res))
 
-        await got.getAllHouses()
+        await this.gotService.getAllHouses()
             .then(res => console.log('AllHouses', res))
 
-        await got.getAllCharacters()
+        await this.gotService.getAllCharacters()
             // для вывода отдельных пунктов res.forEach(item => console.log(item.name))
             .then(res => console.log('AllCharacters', res));
 
-        got.getBook(2)
+        this.gotService.getBook(2)
             .then(res => console.log('Book 2', res))
 
-        got.getHouse(41)
+        this.gotService.getHouse(41)
             .then(res => console.log('House 41', res))
 
-        got.getCharacter(103)
+        this.gotService.getCharacter(103)
             .then(res => console.log('Character 103', res))
-    }
-
-    openRandomChar = () => {
-        this.setState(({ randomCharWindow }) => ({
-            randomCharWindow: !randomCharWindow
-        }))
     }
 
     render() {
 
         // this.consoleOutput();
-
-        const viewRandomChar = this.state.randomCharWindow ? <RandomChar /> : null;
-        const buttonText = this.state.randomCharWindow ? 'Скрыть RandomChar' : 'Показать RandomChar'
-        if (this.state.error) {
-            return <ErrorMessage />
-        }
 
         return (
             <>
@@ -72,15 +46,10 @@ export default class App extends Component {
                     <Header />
                 </Container>
                 <Container>
-                    <Row>
-                        <Col lg={{ size: 5, offset: 0 }}>
-                            {viewRandomChar}
-                            <StdButton onClick={this.openRandomChar}>{buttonText}</StdButton>
-                        </Col>
-                    </Row>
+                    <RandomItem />
                     <CharacterPage />
-                    {/* <CharacterPage />
-                    <CharacterPage /> */}
+                    <HousePage />
+                    <BookPage />
                 </Container>
             </>
         );
