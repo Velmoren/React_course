@@ -47,6 +47,7 @@ export default class CharacterPage extends Component {
                 itemId={this.state.selectedItem}
                 getInfo={this.gotService.getCharacter}
                 renderItem={(item) => item.name}
+                getMessage={'Please select a Character'}
             >
                 <Field field='gender' label='Gender' />
                 <Field field='born' label='Born' />

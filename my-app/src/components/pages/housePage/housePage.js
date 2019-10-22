@@ -47,6 +47,7 @@ export default class HousePage extends Component {
                 itemId={this.state.selectedItem}
                 getInfo={this.gotService.getHouse}
                 renderItem={(item) => item.name}
+                getMessage={'Please select a House'}
             >
                 <Field field='region' label='Region' />
                 <Field field='words' label='Words' />

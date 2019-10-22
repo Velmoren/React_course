@@ -83,10 +83,11 @@ export default class ItemDetails extends Component {
 
     render() {
         const { item, loading, error } = this.state;
+        const { getMessage } = this.props;
 
-
+        // Please select a character
         if (!item && !loading) {
-            return <SelectError>Please select a character</SelectError>
+            return <SelectError>{getMessage}</SelectError>
         }
 
         const ViewDatail = () => {

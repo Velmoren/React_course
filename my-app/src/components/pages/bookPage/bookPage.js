@@ -48,6 +48,7 @@ export default class BookPage extends Component {
                 itemId={this.state.selectedItem}
                 getInfo={this.gotService.getBook}
                 renderItem={(item) => item.name}
+                getMessage={'Please select a Book'}
             >
                 <Field field='authors' label='Authors' />
                 <Field field='isbn' label='isbn' />
