@@ -49,10 +49,10 @@ export default class App extends Component {
                     </Container>
                     <Container>
                         <Route path='/main' exact component={RandomItem} />
-                        <Route path='/characters' component={CharacterPage} />
-                        <Route path='/houses' component={HousePage} />
-                        <Route path='/books' exact component={BookPage} />
-                        <Route path='/books/:id' render={
+                        <Route path='/main/characters' component={CharacterPage} />
+                        <Route path='/main/houses' component={HousePage} />
+                        <Route path='/main/books' exact component={BookPage} />
+                        <Route path='/main/books/:id' render={
                             ({ match }) => {
                                 const { id } = match.params;
 

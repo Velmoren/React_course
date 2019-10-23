@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Spinner from '../spinner';
+import PropTypes from 'prop-types'
+import GotService from '../../services/gotService'
 
 import styled from 'styled-components';
 
@@ -8,22 +10,8 @@ const ListItem = styled.li`
     cursor: pointer;
 `
 
-export default class ItemList extends Component {
+class ItemList extends Component {
 
-    state = {
-        itemList: null
-    }
-
-    componentDidMount() {
-        const { getData } = this.props;
-
-        getData()
-            .then((itemList) => {
-                this.setState({
-                    itemList
-                })
-            })
-    }
 
     renderItems(arr) {
         return arr.map((item) => {
@@ -43,14 +31,9 @@ export default class ItemList extends Component {
     }
 
     render() {
+        const { data } = this.props
 
-        const { itemList } = this.state;
-
-        if (!itemList) {
-            return <Spinner />
-        }
-
-        const items = this.renderItems(itemList)
+        const items = this.renderItems(data)
 
         return (
             <ul className="item-list list-group">
@@ -59,3 +42,45 @@ export default class ItemList extends Component {
         );
     }
 }
+
+const withData = (View, getData) => {
+    return class extends Component {
+
+        state = {
+            data: null
+        }
+
+        static defaultProps = {
+            onItemSelected: () => { }
+        }
+
+        static propTypes = {
+            onItemSelected: PropTypes.func
+        }
+
+        componentDidMount() {
+
+            getData()
+                .then((data) => {
+                    this.setState({
+                        data
+                    })
+                })
+        }
+
+
+
+        render() {
+            const { data } = this.state;
+
+            if (!data) {
+                return <Spinner />
+            }
+
+            return <View {...this.props} data={data} />
+        }
+    }
+}
+const { getAllCharacters } = new GotService();
+export default withData(ItemList, getAllCharacters);
+

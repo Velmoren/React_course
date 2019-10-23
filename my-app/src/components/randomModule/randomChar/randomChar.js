@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import GotService from '../../../services/gotService';
 import Spinner from '../../spinner';
 import ErrorMessage from '../../errorMessage';
+import PropTypes from 'prop-types'
 
 import styled from 'styled-components';
 
@@ -30,13 +31,21 @@ export default class RandomChar extends Component {
         error: false
     }
 
-    componentDidMount() {
-        this.updateChar();
-        this.timerId = setInterval(this.updateChar, 1500);
+    static defaultProps = {
+        interval: 1500
     }
 
+    static propTypes = {
+        interval: PropTypes.number
+    }
+
+    componentDidMount() {
+        this.updateChar();
+        this.timerId = setInterval(this.updateChar, this.props.interval);
+    }
     componentWillUnmount() {
-        if (this.timerId) clearInterval(this.timerId)
+        clearInterval(this.timerId)
+
     }
 
     onCharLoaded = (char) => {
