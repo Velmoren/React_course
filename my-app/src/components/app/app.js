@@ -48,7 +48,7 @@ export default class App extends Component {
                         <Header />
                     </Container>
                     <Container>
-                        <Route path='/' exact component={RandomItem} />
+                        <Route path='/main' exact component={RandomItem} />
                         <Route path='/characters' component={CharacterPage} />
                         <Route path='/houses' component={HousePage} />
                         <Route path='/books' exact component={BookPage} />
@@ -59,6 +59,7 @@ export default class App extends Component {
                                 return <BooksItem bookId={id} />
                             }
                         } />
+                        {/* <Route path='*' exact={true} component={My404Component} /> */}
                     </Container>
                 </div>
             </Router>
