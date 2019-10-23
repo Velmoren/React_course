@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { Container } from 'reactstrap';
 import Header from '../header';
 import GotService from '../../services/gotService';
-import CharacterPage from '../pages/characterPage'
-import HousePage from '../pages/housePage'
-import BookPage from '../pages/bookPage'
+import { CharacterPage, HousePage, BookPage, BooksItem } from '../pages'
 import RandomItem from '../randomModule/randomItem'
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
+import './app.css';
 
 export default class App extends Component {
 
@@ -41,17 +42,26 @@ export default class App extends Component {
         // this.consoleOutput();
 
         return (
-            <>
-                <Container>
-                    <Header />
-                </Container>
-                <Container>
-                    <RandomItem />
-                    <CharacterPage />
-                    <HousePage />
-                    <BookPage />
-                </Container>
-            </>
+            <Router>
+                <div className="app">
+                    <Container>
+                        <Header />
+                    </Container>
+                    <Container>
+                        <Route path='/' exact component={RandomItem} />
+                        <Route path='/characters' component={CharacterPage} />
+                        <Route path='/houses' component={HousePage} />
+                        <Route path='/books' exact component={BookPage} />
+                        <Route path='/books/:id' render={
+                            ({ match }) => {
+                                const { id } = match.params;
+
+                                return <BooksItem bookId={id} />
+                            }
+                        } />
+                    </Container>
+                </div>
+            </Router>
         );
     }
 }

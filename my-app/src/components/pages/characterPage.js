@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
-import ItemList from '../../itemList'
-import ItemDetails, { Field } from '../../itemDetails'
-import ErrorMessage from '../../errorMessage'
-import GotService from '../../../services/gotService'
-import RowBlock from '../../rowBlock'
+import ItemList from '../itemList'
+import ItemDetails, { Field } from '../itemDetails'
+import ErrorMessage from '../errorMessage'
+import GotService from '../../services/gotService'
+import RowBlock from '../rowBlock'
 
 // import styled from 'styled-components';
 
-export default class BookPage extends Component {
+export default class CharacterPage extends Component {
 
     gotService = new GotService();
 
     state = {
-        selectedItem: 2,
+        selectedItem: 130,
         error: false
     }
 
@@ -31,7 +31,6 @@ export default class BookPage extends Component {
     render() {
         const { error } = this.state;
 
-
         if (error) {
             return <ErrorMessage />
         }
@@ -39,20 +38,21 @@ export default class BookPage extends Component {
         const itemList = (
             <ItemList
                 onItemSelected={this.onItemSelected}
-                getData={this.gotService.getAllBooks}
-                renderItem={({ name }) => `${name}`}
+                getData={this.gotService.getAllCharacters}
+                renderItem={({ name, gender }) => `${name} (${gender})`}
             />
         )
         const itemDetails = (
             <ItemDetails
                 itemId={this.state.selectedItem}
-                getInfo={this.gotService.getBook}
+                getInfo={this.gotService.getCharacter}
                 renderItem={(item) => item.name}
-                getMessage={'Please select a Book'}
+                getMessage={'Please select a Character'}
             >
-                <Field field='authors' label='Authors' />
-                <Field field='isbn' label='isbn' />
-                <Field field='numberOfPages' label='Number of pages' />
+                <Field field='gender' label='Gender' />
+                <Field field='born' label='Born' />
+                <Field field='died' label='Died' />
+                <Field field='culture' label='Culture' />
             </ItemDetails>
         )
 
