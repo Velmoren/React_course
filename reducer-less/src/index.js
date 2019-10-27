@@ -29,6 +29,17 @@ const getResource = async (url) => {
     return await res.json();
 }
 
+const postData = (elem, url) => {
+    return fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(elem)
+    })
+        .catch(error => console.error('Ошибка операции', error));
+}
+
 document.getElementById('plus').addEventListener('click', () => {
     store.dispatch(plus())
 });
@@ -49,11 +60,14 @@ document.getElementById('download').addEventListener('click', () => {
         })
 });
 
+document.getElementById('upload').addEventListener('click', () => {
+    let elem = {};
+    elem['saved'] = document.getElementById('counter').textContent;
+    postData(elem, 'http://localhost:3001/numbers');
+});
+
 const update = () => {
     document.getElementById('counter').textContent = store.getState();
 }
 
 store.subscribe(update);
-
-
-// asda
