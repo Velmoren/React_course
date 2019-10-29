@@ -54,21 +54,21 @@
 }
 
 .btn-plus {
-    background: #089C20;
+    background: url(./plus.svg) center center no-repeat,  #089C20;
 }
 
 .btn-minus {
-    background: #E7AA10;
+    background: url(./minus.svg) center center no-repeat,  #E7AA10;
 }
 
 .btn-reset {
-    background: #CF1C1C;
+    background: url(./reset.svg) center center no-repeat,  #CF1C1C;
 }
 
 .btn-download {
-    background: #30D9CF;
+    background: url(./download.svg) center center no-repeat,  #30D9CF;
 }
 
 .btn-upload {
-    background: #9B0F9E;
+    background: url(./upload.svg) center center no-repeat,  #9B0F9E;
 }
