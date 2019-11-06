@@ -21,6 +21,7 @@ class MenuList extends Component {
 
     render() {
         const { menuItems, loading, error } = this.props;
+        console.log(menuItems);
 
         if (error) {
             return <Error />

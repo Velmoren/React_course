@@ -29,6 +29,13 @@
             font-weight: 700;
         }
     }
+    &__category {
+        display: flex;
+        justify-content: space-between;
+        &-icon {
+            max-width: 30px;
+        }
+    }
     &__btn {
         width: 150px;
         height: 40px;
