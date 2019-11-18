@@ -7,12 +7,12 @@ import RowBlock from '../rowBlock'
 
 // import styled from 'styled-components';
 
-export default class CharacterPage extends Component {
+export default class HousePage extends Component {
 
     gotService = new GotService();
 
     state = {
-        selectedItem: 130,
+        selectedItem: null,
         error: false
     }
 
@@ -38,21 +38,20 @@ export default class CharacterPage extends Component {
         const itemList = (
             <ItemList
                 onItemSelected={this.onItemSelected}
-                getData={this.gotService.getAllCharacters}
-                renderItem={({ name, gender }) => `${name} (${gender})`}
+                getData={this.gotService.getAllHouses}
+                renderItem={({ name }) => `${name}`}
             />
         )
         const itemDetails = (
             <ItemDetails
                 itemId={this.state.selectedItem}
-                getInfo={this.gotService.getCharacter}
+                getInfo={this.gotService.getHouse}
                 renderItem={(item) => item.name}
-                getMessage={'Please select a Character'}
+                getMessage={'Please select a House'}
             >
-                <Field field='gender' label='Gender' />
-                <Field field='born' label='Born' />
-                <Field field='died' label='Died' />
-                <Field field='culture' label='Culture' />
+                <Field field='region' label='Region' />
+                <Field field='words' label='Words' />
+                <Field field='titles' label='Titles' />
             </ItemDetails>
         )
 

@@ -22,7 +22,7 @@ const Term = styled.span`
 `
 
 export default class RandomChar extends Component {
-
+    _isMounted = false;
     gotService = new GotService();
 
     state = {
@@ -40,10 +40,14 @@ export default class RandomChar extends Component {
     }
 
     componentDidMount() {
-        this.updateChar();
-        this.timerId = setInterval(this.updateChar, this.props.interval);
+        this._isMounted = true;
+        if (this._isMounted) {
+            this.updateChar();
+            this.timerId = setInterval(this.updateChar, this.props.interval);
+        }
     }
     componentWillUnmount() {
+        this._isMounted = false;
         clearInterval(this.timerId)
 
     }

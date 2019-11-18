@@ -41,7 +41,7 @@ export default class GotService {
     }
 
     getAllBooks = async () => {
-        const res = await this.getResource('/books?pageSize=10')
+        const res = await this.getResource('/books')
         return res.map(this._transformBooks)
     }
 
@@ -83,6 +83,7 @@ export default class GotService {
         for (let elem in books) {
             if (books[elem] === '') books[elem] = 'No information'
         }
+
         return {
             name: books.name,
             isbn: books.isbn,
