@@ -17,8 +17,27 @@ const menuError = () => {
     }
 }
 
+const addedToCard = (id, price) => {
+    return {
+        type: 'ITEM_ADD_TO_CARD',
+        payload: id,
+        price: price
+    }
+}
+
+const deleteFromCard = (id, count, price) => {
+    return {
+        type: 'ITEM_REMOVE_FROM_CARD',
+        payload: id,
+        count: count,
+        price: price
+    }
+}
+
 export {
     menuLoaded,
     menuRequested,
-    menuError
+    menuError,
+    addedToCard,
+    deleteFromCard
 };
