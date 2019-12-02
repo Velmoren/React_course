@@ -1,0 +1,11 @@
+.best {
+    padding: 80px 0 110px 0;
+    background-color: #fff;
+    background: url('../../../../media/img/paper.jpg') center center no-repeat;
+    background-size: cover;
+}
+
+.wrapper {
+    display: flex ;
+    flex-wrap: wrap;
+}

@@ -1,0 +1,24 @@
+.item {
+    font-size: 12px;
+    margin-right: 40px;
+    font-weight: normal;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.item :first-child  {
+    transform: translateY(3px);
+}
+
+.item a {
+    color: #fff ;
+}
+
+.item a:visited {
+    text-decoration: none;
+    color: #fff;
+}
+.item a:hover {
+    text-decoration: none;
+    color: #fff;
+}
+                

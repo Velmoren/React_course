@@ -1,0 +1,25 @@
+.shop {
+    padding: 70px 0 40px 0;
+}
+
+.shop__girl {
+    display: block;
+    margin: 0 auto;
+}
+
+.shop__point {
+    margin-top: 16px;
+}
+
+.shop__point:first-child {
+    margin-top: 26px;
+}
+
+.shop__point span {
+    font-weight: bold;
+} 
+
+.shop__point__price {
+    font-size: 24px;
+    font-weight: normal !important;
+}

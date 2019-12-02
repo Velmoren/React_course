@@ -1,0 +1,19 @@
+.item {
+    font-size: 12px;
+    margin-right: 40px;
+    font-weight: normal;
+}
+
+.item a {
+    color: #000;
+}
+
+.item a:visited {
+    text-decoration: none;
+    color: #000;
+}
+.item a:hover {
+    text-decoration: none;
+    color: #000;
+}
+                
