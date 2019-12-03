@@ -13,7 +13,7 @@ const BlockSearch = (props) => {
         <Row>
             <Col lg={{ size: '4', offset: 2 }}>
                 <form action="#" className="shop__search">
-                    <label className={search__label} for="filter">Looking for</label>
+                    <label className={search__label} htmlFor="filter">Looking for</label>
                     <input id="filter" type="text" placeholder="start typing here..." className={search__input} />
                 </form>
             </Col>

@@ -1,42 +1,61 @@
-import React from 'react';
-import SectionItem from './sectionItem';
+import React, { Component } from 'react';
+import BlockItems from '../../../blocks/blockItems'
+import Data from '../../../../services/dataService/dataService';
+import Spinner from '../../../spinner'
+import { withRouter } from 'react-router-dom';
 
 // files
 
 // style
-import { Col, Row, Container } from 'reactstrap';
+import { Container } from 'reactstrap';
 import classes from './SectionBest.module.css';
 import classesCommon from '../../../app/App.module.css';
 
-const { best, wrapper } = classes;
+const { best } = classes;
 const { title } = classesCommon;
 
-const SectionBest = (props) => {
-    return (
-        <section className={best}>
-            <Container className="container">
-                <div className={title}>Our best</div>
-                <Row>
-                    <Col lg={{ size: '10', offset: 1 }}>
-                        <div className={wrapper}>
-                            <SectionItem
-                                src={'https://www.sciencenews.org/sites/default/files/main/articles/100315_coffee_opener_NEW_0.jpg'}
-                                name={'Solimo Coffee Beans 2kg'}
-                                price={'10.73$'} />
-                            <SectionItem
-                                src={'https://www.sciencenews.org/sites/default/files/main/articles/100315_coffee_opener_NEW_0.jpg'}
-                                name={'Presto Coffee Beans 1kg'}
-                                price={'15.99$'} />
-                            <SectionItem
-                                src={'https://www.sciencenews.org/sites/default/files/main/articles/100315_coffee_opener_NEW_0.jpg'}
-                                name={'AROMISTICO Coffee 1kg'}
-                                price={'6.99$'} />
-                        </div>
-                    </Col>
-                </Row>
-            </Container>
-        </section>
-    )
+
+
+class SectionBest extends Component {
+
+    state = {
+        items: null,
+        loading: true,
+        error: false
+    }
+
+    myData = new Data();
+
+    componentDidMount() {
+        setTimeout(() => {
+            this.myData.getItems('/bestsellers/')
+                .then(items => {
+                    this.setState({ items })
+                    this.setState({ loading: false })
+                })
+        }, 500);
+    }
+
+    render() {
+        const { items, loading } = this.state;
+
+        const content = loading ? <Spinner /> :
+            <BlockItems
+                items={items}
+                cursor={'pointer'}
+                active={true}
+                onItemSelected={(index) => { this.props.history.push(`/${index}`) }}
+            />
+
+        return (
+            <section className={best} >
+                <Container className="container">
+                    <div className={title}>Our best</div>
+                    {content}
+                </Container>
+            </section>
+        )
+    }
 }
 
-export default SectionBest;
+export default withRouter(SectionBest)

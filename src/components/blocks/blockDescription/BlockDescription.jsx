@@ -1,27 +1,29 @@
 import React from 'react';
 
 // files
-import girl__img from '../../../../../media/img/Cup_image.jpg';
-import logo__dark__img from '../../../../../media/logo/Beans_logo_dark.svg'
+import logo__dark__img from '../../../media/logo/Beans_logo_dark.svg'
 
 // style
 import { Col, Row, Container } from 'reactstrap';
 import classNameNamees from './BlockDescription.module.css';
-import classNameNameesCommon from '../../../../app/App.module.css';
+import classNameNameesCommon from '../../app/App.module.css';
 
 const { shop, shop__girl, shop__text } = classNameNamees;
 const { title, beanslogo } = classNameNameesCommon;
 
 const BlockDescription = (props) => {
+
+    const { image } = props;
+
     return (
         <section className={shop}>
             <Container>
                 <Row>
                     <Col lg={{ size: '4', offset: 2 }}>
-                        <img className={shop__girl} src={girl__img} alt="girl" />
+                        <img className={shop__girl} src={image} alt="girl" />
                     </Col>
                     <Col lg='4'>
-                        <div className={title}>About our goods</div>
+                        <div className={title}>About our beans</div>
                         <img className={beanslogo} src={logo__dark__img} alt="Beans logo" />
                         <div className={shop__text}>
                             Extremity sweetness difficult behaviour he of. On disposal of as landlord horrible.

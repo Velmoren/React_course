@@ -1,13 +1,16 @@
 import React from 'react';
 import Banner from '../../banner';
-import ItemDetails from './temDetails';
+import ItemDetails from './itemDetails';
 import Footer from '../../footer';
 
-const ItemPage = () => {
+const ItemPage = (props) => {
+
+    const { itemId, type } = props;
+
     return (
         <>
             <Banner text={'Our Coffee'} />
-            <ItemDetails />
+            <ItemDetails itemId={itemId} type={type} />
             <Footer />
         </>
     )

@@ -5,7 +5,7 @@ import SectionPleasure from './sectionPleasure';
 const ForYourPleasure = () => {
     return (
         <>
-            <Banner text={'Our Coffee'} />
+            <Banner text={'For your pleasure'} />
             <SectionPleasure />
         </>
     )
