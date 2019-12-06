@@ -3,6 +3,7 @@ import Footer from '../../../footer';
 import BlockDescription from '../../../blocks/blockDescription';
 import BlockSearchAndFilter from '../../../blocks/blockSearchAndFilter';
 import BlockItem from '../../../blocks/blockItem';
+import firebase from '../../../../services/firebase';
 
 import Data from '../../../../services/dataService/dataService';
 import Spinner from '../../../spinner';
@@ -31,13 +32,21 @@ class SectionShop extends Component {
     myData = new Data();
 
     componentDidMount() {
+        // setTimeout(() => {
+        //     this.myData.getItems('/coffee/')
+        //         .then(items => {
+        //             this.setState({ items })
+        //             this.setState({ loading: false })
+        //         })
+        // }, 500);
         setTimeout(() => {
-            this.myData.getItems('/coffee/')
-                .then(items => {
-                    this.setState({ items })
-                    this.setState({ loading: false })
+            firebase.database().ref().child('coffee').on('value', (snapshot) => {
+                this.setState({
+                    items: snapshot.val(),
+                    loading: false
                 })
-        }, 500);
+            })
+        }, 400);
     }
 
     onUpdateSearch = (char) => {

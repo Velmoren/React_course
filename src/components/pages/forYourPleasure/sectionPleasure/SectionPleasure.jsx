@@ -4,6 +4,7 @@ import BlockDescription from '../../../blocks/blockDescription';
 import BlockItem from '../../../blocks/blockItem'
 import Data from '../../../../services/dataService/dataService';
 import Spinner from '../../../spinner';
+import firebase from '../../../../services/firebase';
 
 // files
 import Cup__img from '../../../../media/img/Cup_image.jpg';
@@ -27,13 +28,21 @@ export default class SectionPleasure extends Component {
     myData = new Data();
 
     componentDidMount() {
+        // setTimeout(() => {
+        //     this.myData.getItems('/goods/')
+        //         .then(items => {
+        //             this.setState({ items })
+        //             this.setState({ loading: false })
+        //         })
+        // }, 500);
         setTimeout(() => {
-            this.myData.getItems('/goods/')
-                .then(items => {
-                    this.setState({ items })
-                    this.setState({ loading: false })
+            firebase.database().ref().child('goods').on('value', (snapshot) => {
+                this.setState({
+                    items: snapshot.val(),
+                    loading: false
                 })
-        }, 500);
+            })
+        }, 400);
     }
 
     renderItems(items) {

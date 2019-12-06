@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Data from '../../../../services/dataService/dataService';
 import Spinner from '../../../spinner';
+import firebase from '../../../../services/firebase';
 
 // files
 import logo__dark__img from '../../../../media/logo/Beans_logo_dark.svg';
@@ -24,13 +25,23 @@ export default class ItemDetails extends Component {
     myData = new Data();
 
     componentDidMount() {
-        this.myData.getItems('/coffee/')
-            .then(items => {
-                this.setState({ items })
+        // this.myData.getItems('/coffee/')
+        //     .then(items => {
+        //         this.setState({ items })
+        //         let item = this.state.items.filter(item => item.name === this.props.itemName)
+        //         this.setState({ item: item[0] })
+        //         this.setState({ loading: false })
+        //     })
+        setTimeout(() => {
+            firebase.database().ref().child('coffee').on('value', (snapshot) => {
+                this.setState({
+                    items: snapshot.val()
+                })
                 let item = this.state.items.filter(item => item.name === this.props.itemName)
                 this.setState({ item: item[0] })
                 this.setState({ loading: false })
             })
+        }, 400);
     }
 
     render() {

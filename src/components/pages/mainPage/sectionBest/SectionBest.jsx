@@ -3,6 +3,7 @@ import Data from '../../../../services/dataService/dataService';
 import BlockItem from '../../../blocks/blockItem';
 import Spinner from '../../../spinner'
 import { withRouter, Link } from 'react-router-dom';
+import firebase from '../../../../services/firebase';
 
 // files
 
@@ -27,16 +28,25 @@ class SectionBest extends Component {
     myData = new Data();
 
     componentDidMount() {
+        // setTimeout(() => {
+        //     this.myData.getItems('/bestsellers/')
+        //         .then(items => {
+        //             this.setState({ items })
+        //             this.setState({ loading: false })
+        //         })
+        // }, 500);
         setTimeout(() => {
-            this.myData.getItems('/bestsellers/')
-                .then(items => {
-                    this.setState({ items })
-                    this.setState({ loading: false })
+            firebase.database().ref().child('bestsellers').on('value', (snapshot) => {
+                this.setState({
+                    items: snapshot.val(),
+                    loading: false
                 })
-        }, 500);
+            })
+        }, 400);
     }
 
     renderItems(items) {
+
         return items.map((item, index) => {
 
             return (
@@ -51,6 +61,7 @@ class SectionBest extends Component {
         const { items, loading } = this.state;
 
         const content = loading ? <Spinner /> : this.renderItems(items)
+
 
         return (
             <section className={best} >

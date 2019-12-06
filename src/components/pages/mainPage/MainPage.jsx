@@ -4,6 +4,7 @@ import SectionAbout from './sectionAbout';
 import SectionBest from './sectionBest';
 import Footer from '../../footer';
 
+
 const MainPage = () => {
     return (
         <>

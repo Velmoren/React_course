@@ -1,3 +1,5 @@
+
+
 export default class RestoService {
     _apiBase = `http://localhost:3001`;
     // _apiBase = `https://velmoren.000webhostapp.com/db.json`;
@@ -13,23 +15,25 @@ export default class RestoService {
         return await res.json();
     }
 
-    getBestsellers = async () => {
-        let res = await this.getResource(`/bestsellers/`);
-        return res;
-    }
-
-    getCoffee = async () => {
-        let res = await this.getResource(`/coffee/`);
-        return res;
-    }
-
-    getGoods = async () => {
-        let res = await this.getResource(`/goods/`);
-        return res;
-    }
-
     getItems = async (type) => {
         let res = await this.getResource(type);
         return res;
     }
+
+    submit = async (url, body) => {
+        const res = await fetch(`${url}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        })
+
+        if (!res.ok) {
+            throw new Error(`Could not fetch ${url}, recived ${res.status}`)
+        }
+        return await res.json()
+    }
 }
+
+
