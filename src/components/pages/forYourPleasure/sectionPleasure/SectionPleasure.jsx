@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Footer from '../../../footer';
 import BlockDescription from '../../../blocks/blockDescription';
-import BlockItems from '../../../blocks/blockItems';
+import BlockItem from '../../../blocks/blockItem'
 import Data from '../../../../services/dataService/dataService';
 import Spinner from '../../../spinner';
 
@@ -9,12 +9,12 @@ import Spinner from '../../../spinner';
 import Cup__img from '../../../../media/img/Cup_image.jpg';
 
 // style
-import { Container } from 'reactstrap';
-import classNameNamees from './SectionPleasure.module.css';
-import classNameNameesCommon from '../../../app/App.module.css';
+import { Container, Row, Col } from 'reactstrap';
+import classes from './SectionPleasure.module.css';
+import classesCommon from '../../../app/App.module.css';
 
-const { shop } = classNameNamees;
-const { line } = classNameNameesCommon;
+const { shop, wrapper, card } = classes;
+const { line } = classesCommon;
 
 export default class SectionPleasure extends Component {
 
@@ -36,21 +36,36 @@ export default class SectionPleasure extends Component {
         }, 500);
     }
 
+    renderItems(items) {
+        return items.map((item, index) => {
+
+            return (
+
+                <div key={index} className={card}>
+                    <BlockItem item={item} />
+                </div>
+            )
+        })
+    }
+
     render() {
 
         const { items, loading } = this.state;
 
-        const content = loading ? <Spinner /> : <BlockItems items={items} cursor={'auto'} active={false} />;
-
-        console.log(items);
-
+        const content = loading ? <Spinner /> : this.renderItems(items)
 
         return (
             <section className={shop} >
                 <Container>
                     <BlockDescription image={Cup__img} />
                     <div className={line}></div>
-                    {content}
+                    <Row>
+                        <Col lg={{ size: '10', offset: 1 }} >
+                            <div className={wrapper}>
+                                {content}
+                            </div>
+                        </Col>
+                    </Row>
                     <Footer />
                 </Container >
             </section>

@@ -17,23 +17,27 @@ export default class ItemDetails extends Component {
     state = {
         items: null,
         loading: true,
-        error: false
+        error: false,
+        item: null
     }
 
     myData = new Data();
 
     componentDidMount() {
-        this.myData.getItems(this.props.type)
+        this.myData.getItems('/coffee/')
             .then(items => {
                 this.setState({ items })
+                let item = this.state.items.filter(item => item.name === this.props.itemName)
+                this.setState({ item: item[0] })
                 this.setState({ loading: false })
             })
     }
 
     render() {
-        const { items, loading } = this.state;
 
-        let content = loading ? <Spinner /> : <ViewDetails item={items[+this.props.itemId]} />
+        const { item, loading } = this.state;
+
+        let content = loading ? <Spinner /> : <ViewDetails item={item} />
 
         return (
             <>
@@ -44,6 +48,8 @@ export default class ItemDetails extends Component {
 }
 
 const ViewDetails = (props) => {
+
+
 
     const { country, url, price, description } = props.item;
 

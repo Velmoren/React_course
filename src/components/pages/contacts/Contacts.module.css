@@ -1,0 +1,14 @@
+.contacts {
+    padding: 80px 0 110px 0;
+    background-color: #fff;
+}
+
+.textarea label {
+    display: block;
+    text-align: center;
+}
+
+.textarea textarea{
+    resize: none;
+}
+

@@ -4,17 +4,21 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^4.4.1",
+    "formik": "^2.0.6",
     "react": "^16.12.0",
     "react-bootstrap": "^1.0.0-beta.16",
     "react-dom": "^16.12.0",
+    "react-input-mask": "^2.0.4",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
-    "reactstrap": "^8.1.1"
+    "reactstrap": "^8.1.1",
+    "styled-components": "^5.0.0-rc.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "server": "json-server --watch public/db.json --port 3001",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

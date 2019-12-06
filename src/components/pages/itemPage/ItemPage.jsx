@@ -5,12 +5,12 @@ import Footer from '../../footer';
 
 const ItemPage = (props) => {
 
-    const { itemId, type } = props;
+    const { itemName, type } = props;
 
     return (
         <>
             <Banner text={'Our Coffee'} />
-            <ItemDetails itemId={itemId} type={type} />
+            <ItemDetails itemName={itemName} type={type} />
             <Footer />
         </>
     )

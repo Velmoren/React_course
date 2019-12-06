@@ -1,4 +1,4 @@
-.item {
+.card {
     width: 220px;
     min-height: 240px;
     margin: 60px 40px 0 40px;
@@ -9,11 +9,11 @@
     transition: 0.3s all;
 }
 
-.item:hover {
+.card:hover {
     box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.25);
 } 
 
-.item img {
+.card__img {
     display: block; 
     margin: 0 auto;
     width: 151px;
@@ -21,9 +21,8 @@
     object-fit: cover;
 }
 
-.item__title, .item__country, .item__price {
+.card__title, .card__country, .card__price {
     font-size: 14px;
     margin-top: 10px;
     text-align: right;
 }
-                
