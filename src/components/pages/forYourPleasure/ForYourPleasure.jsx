@@ -1,5 +1,6 @@
 import React from 'react';
 import Banner from '../../banner';
+import Footer from '../../footer'
 import SectionPleasure from './sectionPleasure';
 
 const ForYourPleasure = () => {
@@ -7,6 +8,7 @@ const ForYourPleasure = () => {
         <>
             <Banner text={'For your pleasure'} />
             <SectionPleasure />
+            <Footer />
         </>
     )
 }

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import Data from '../../../../services/dataService/dataService';
 import BlockItem from '../../../blocks/blockItem';
 import Spinner from '../../../spinner'
 import { withRouter, Link } from 'react-router-dom';
 import firebase from '../../../../services/firebase';
+import ErrorMessage from '../../../errorMessage';
 
 // files
 
@@ -20,32 +20,26 @@ const { title } = classesCommon;
 class SectionBest extends Component {
 
     state = {
-        items: null,
+        items: {},
         loading: true,
         error: false
     }
 
-    myData = new Data();
-
     componentDidMount() {
-        // setTimeout(() => {
-        //     this.myData.getItems('/bestsellers/')
-        //         .then(items => {
-        //             this.setState({ items })
-        //             this.setState({ loading: false })
-        //         })
-        // }, 500);
         setTimeout(() => {
-            firebase.database().ref().child('bestsellers').on('value', (snapshot) => {
-                this.setState({
-                    items: snapshot.val(),
-                    loading: false
-                })
-            })
+            firebase
+                .database()
+                .ref()
+                .child('bestsellers')
+                .once('value')
+                .then(snapshot => this.setState({ items: snapshot.val() }))
+                .then(() => this.setState({ loading: false }))
+                .catch(() => this.setState({ error: true }))
         }, 400);
     }
 
     renderItems(items) {
+
 
         return items.map((item, index) => {
 
@@ -58,9 +52,11 @@ class SectionBest extends Component {
     }
 
     render() {
-        const { items, loading } = this.state;
+        const { items, loading, error } = this.state;
 
-        const content = loading ? <Spinner /> : this.renderItems(items)
+        const errorMessage = error ? <ErrorMessage /> : null;
+        const spinner = loading ? <Spinner /> : null;
+        const content = !(loading || error) ? this.renderItems(items) : null;
 
 
         return (
@@ -70,6 +66,8 @@ class SectionBest extends Component {
                     <Row>
                         <Col lg={{ size: '10', offset: 1 }} >
                             <div className={wrapper}>
+                                {errorMessage}
+                                {spinner}
                                 {content}
                             </div>
                         </Col>

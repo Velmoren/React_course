@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Data from '../../../../services/dataService/dataService';
 import Spinner from '../../../spinner';
 import firebase from '../../../../services/firebase';
 
@@ -22,25 +21,19 @@ export default class ItemDetails extends Component {
         item: null
     }
 
-    myData = new Data();
-
     componentDidMount() {
-        // this.myData.getItems('/coffee/')
-        //     .then(items => {
-        //         this.setState({ items })
-        //         let item = this.state.items.filter(item => item.name === this.props.itemName)
-        //         this.setState({ item: item[0] })
-        //         this.setState({ loading: false })
-        //     })
         setTimeout(() => {
-            firebase.database().ref().child('coffee').on('value', (snapshot) => {
-                this.setState({
-                    items: snapshot.val()
+            firebase
+                .database()
+                .ref()
+                .child('coffee')
+                .once('value')
+                .then(snapshot => this.setState({ items: snapshot.val() }))
+                .then(() => {
+                    let item = this.state.items.filter(item => item.name === this.props.itemName)
+                    this.setState({ item: item[0] })
+                    this.setState({ loading: false })
                 })
-                let item = this.state.items.filter(item => item.name === this.props.itemName)
-                this.setState({ item: item[0] })
-                this.setState({ loading: false })
-            })
         }, 400);
     }
 

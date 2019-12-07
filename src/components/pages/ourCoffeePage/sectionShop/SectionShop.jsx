@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import Footer from '../../../footer';
 import BlockDescription from '../../../blocks/blockDescription';
 import BlockSearchAndFilter from '../../../blocks/blockSearchAndFilter';
 import BlockItem from '../../../blocks/blockItem';
 import firebase from '../../../../services/firebase';
 
-import Data from '../../../../services/dataService/dataService';
 import Spinner from '../../../spinner';
 import { withRouter, Link } from 'react-router-dom';
 
@@ -29,23 +27,15 @@ class SectionShop extends Component {
         filter: 'all'
     }
 
-    myData = new Data();
-
     componentDidMount() {
-        // setTimeout(() => {
-        //     this.myData.getItems('/coffee/')
-        //         .then(items => {
-        //             this.setState({ items })
-        //             this.setState({ loading: false })
-        //         })
-        // }, 500);
         setTimeout(() => {
-            firebase.database().ref().child('coffee').on('value', (snapshot) => {
-                this.setState({
-                    items: snapshot.val(),
-                    loading: false
-                })
-            })
+            firebase
+                .database()
+                .ref()
+                .child('coffee')
+                .once('value')
+                .then(snapshot => this.setState({ items: snapshot.val() }))
+                .then(() => this.setState({ loading: false }))
         }, 400);
     }
 
@@ -114,7 +104,6 @@ class SectionShop extends Component {
                             </div>
                         </Col>
                     </Row>
-                    <Footer />
                 </Container >
             </section>
         )

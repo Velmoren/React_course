@@ -129,7 +129,7 @@ class Contacts extends Component {
                 .child('contacts')
                 .push(this.onStateDataFilter())
                 .then(() => history.push("/Contacts/thank-you"))
-                .catch(() => history.push("/error-page"))
+                .catch(() => history.push("/Error"))
         }
 
         this.setState(({ deniedSubmitFields: { deniedSubmissionsCounter } }) => {

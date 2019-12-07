@@ -1,5 +1,6 @@
 import React from 'react';
 import Banner from '../../banner';
+import Footer from '../../footer'
 import SectionShop from './sectionShop';
 
 const OurCoffeePage = () => {
@@ -7,6 +8,7 @@ const OurCoffeePage = () => {
         <>
             <Banner text={'Our Coffee'} />
             <SectionShop />
+            <Footer />
         </>
     )
 }

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import Footer from '../../../footer';
 import BlockDescription from '../../../blocks/blockDescription';
-import BlockItem from '../../../blocks/blockItem'
-import Data from '../../../../services/dataService/dataService';
+import BlockItem from '../../../blocks/blockItem';
 import Spinner from '../../../spinner';
 import firebase from '../../../../services/firebase';
 
@@ -25,23 +23,15 @@ export default class SectionPleasure extends Component {
         error: false
     }
 
-    myData = new Data();
-
     componentDidMount() {
-        // setTimeout(() => {
-        //     this.myData.getItems('/goods/')
-        //         .then(items => {
-        //             this.setState({ items })
-        //             this.setState({ loading: false })
-        //         })
-        // }, 500);
         setTimeout(() => {
-            firebase.database().ref().child('goods').on('value', (snapshot) => {
-                this.setState({
-                    items: snapshot.val(),
-                    loading: false
-                })
-            })
+            firebase
+                .database()
+                .ref()
+                .child('goods')
+                .once('value')
+                .then(snapshot => this.setState({ items: snapshot.val() }))
+                .then(() => this.setState({ loading: false }))
         }, 400);
     }
 
@@ -75,7 +65,6 @@ export default class SectionPleasure extends Component {
                             </div>
                         </Col>
                     </Row>
-                    <Footer />
                 </Container >
             </section>
         )

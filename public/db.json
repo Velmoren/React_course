@@ -82,5 +82,13 @@
       "price": "45.99$"
     }
   ],
-  "contacts": []
+  "contacts": [
+    {
+      "name": "qweqwe",
+      "email": "velmoren@yahoo.com",
+      "phone": "(123) 123-12-31",
+      "message": "sdasdasdasd",
+      "id": 1
+    }
+  ]
 }
