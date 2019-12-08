@@ -5,7 +5,9 @@
 .shop__girl {
     display: block;
     margin: 0 auto;
-    max-width: 400px;
+    width: 320px;
+    height: 300px;
+    box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.25);
 }
 
 .shop__point {
