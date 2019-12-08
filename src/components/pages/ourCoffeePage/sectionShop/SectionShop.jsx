@@ -28,21 +28,19 @@ class SectionShop extends Component {
   }
 
   componentDidMount() {
-    setTimeout(() => {
-      firebase
-        .database()
-        .ref()
-        .child('coffee')
-        .once('value')
-        .then(snapshot => {
-          if (snapshot.val()) {
-            this.setState({ items: snapshot.val() })
-          } else {
-            this.setState({ error: true })
-          }
-        })
-        .then(() => this.setState({ loading: false }))
-    }, 400);
+    firebase
+      .database()
+      .ref()
+      .child('coffee')
+      .once('value')
+      .then(snapshot => {
+        if (snapshot.val()) {
+          this.setState({ items: snapshot.val() })
+        } else {
+          this.setState({ error: true })
+        }
+      })
+      .then(() => this.setState({ loading: false }))
   }
 
   onUpdateSearch = (char) => {

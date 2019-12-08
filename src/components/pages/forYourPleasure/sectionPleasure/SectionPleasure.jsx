@@ -24,21 +24,19 @@ export default class SectionPleasure extends Component {
   }
 
   componentDidMount() {
-    setTimeout(() => {
-      firebase
-        .database()
-        .ref()
-        .child('goods')
-        .once('value')
-        .then(snapshot => {
-          if (snapshot.val()) {
-            this.setState({ items: snapshot.val() })
-          } else {
-            this.setState({ error: true })
-          }
-        })
-        .then(() => this.setState({ loading: false }))
-    }, 400);
+    firebase
+      .database()
+      .ref()
+      .child('goods')
+      .once('value')
+      .then(snapshot => {
+        if (snapshot.val()) {
+          this.setState({ items: snapshot.val() })
+        } else {
+          this.setState({ error: true })
+        }
+      })
+      .then(() => this.setState({ loading: false }))
   }
 
   renderItems(items) {

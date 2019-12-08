@@ -5,9 +5,19 @@ import ForYourPleasure from '../pages/forYourPleasure';
 import Contacts from '../pages/contacts';
 import ItemPage from '../pages/itemPage';
 import ThanksPage from '../pages/thanksPage';
+import ErrorPage from '../pages/errorPage'
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 class App extends Component {
+  state = {
+    buttons: [
+      { name: 'all', label: 'All' },
+      { name: 'Brazil', label: 'Brazil' },
+      { name: 'Kenya', label: 'Kenya' },
+      { name: 'Columbia', label: 'Columbia' },
+    ]
+  }
+
   render() {
 
     return (
@@ -24,6 +34,7 @@ class App extends Component {
             return <ItemPage itemName={newName} />
           }
         } />
+        <Route path={'*'} component={ErrorPage} />
         <Redirect to={'/'} />
       </Switch >
     );

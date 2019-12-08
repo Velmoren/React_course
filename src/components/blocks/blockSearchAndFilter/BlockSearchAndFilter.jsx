@@ -26,6 +26,7 @@ export default class BlockSearchAndFilter extends Component {
   }
 
   render() {
+
     const buttons = this.buttons.map(({ name, label }) => {
       return (
         <button

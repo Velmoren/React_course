@@ -22,21 +22,19 @@ class SectionBest extends Component {
   }
 
   componentDidMount() {
-    setTimeout(() => {
-      firebase
-        .database()
-        .ref()
-        .child('bestsellers')
-        .once('value')
-        .then(snapshot => {
-          if (snapshot.val()) {
-            this.setState({ items: snapshot.val() })
-          } else {
-            this.setState({ error: true })
-          }
-        })
-        .then(() => this.setState({ loading: false }))
-    }, 400);
+    firebase
+      .database()
+      .ref()
+      .child('bestsellers')
+      .once('value')
+      .then(snapshot => {
+        if (snapshot.val()) {
+          this.setState({ items: snapshot.val() })
+        } else {
+          this.setState({ error: true })
+        }
+      })
+      .then(() => this.setState({ loading: false }))
   }
 
   renderItems(items) {
