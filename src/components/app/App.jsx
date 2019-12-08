@@ -5,7 +5,7 @@ import ForYourPleasure from '../pages/forYourPleasure';
 import Contacts from '../pages/contacts';
 import ItemPage from '../pages/itemPage';
 import ThanksPage from '../pages/thanksPage';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 class App extends Component {
   render() {
@@ -24,6 +24,7 @@ class App extends Component {
             return <ItemPage itemName={newName} />
           }
         } />
+        <Redirect to={'/'} />
       </Switch >
     );
   }
