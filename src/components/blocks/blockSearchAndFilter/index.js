@@ -1,3 +1,3 @@
-import BlockSearchAndFilter from './BlockSearchAndFilter'
+import BlockSearchAndFilter from './blockSearchAndFilter'
 
 export default BlockSearchAndFilter;

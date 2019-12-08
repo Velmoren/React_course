@@ -4,13 +4,13 @@ import Footer from '../../footer'
 import SectionPleasure from './sectionPleasure';
 
 const ForYourPleasure = () => {
-    return (
-        <>
-            <Banner text={'For your pleasure'} />
-            <SectionPleasure />
-            <Footer />
-        </>
-    )
+  return (
+    <>
+      <Banner text={'For your pleasure'} />
+      <SectionPleasure />
+      <Footer />
+    </>
+  )
 }
 
 export default ForYourPleasure;

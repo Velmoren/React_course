@@ -5,15 +5,15 @@ import Footer from '../../footer';
 
 const ItemPage = (props) => {
 
-    const { itemName, type } = props;
+  const { itemName, type } = props;
 
-    return (
-        <>
-            <Banner text={'Our Coffee'} />
-            <ItemDetails itemName={itemName} type={type} />
-            <Footer />
-        </>
-    )
+  return (
+    <>
+      <Banner text={'Our Coffee'} />
+      <ItemDetails itemName={itemName} type={type} />
+      <Footer />
+    </>
+  )
 }
 
 export default ItemPage;

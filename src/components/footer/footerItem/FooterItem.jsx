@@ -6,15 +6,15 @@ import classes from './FooterItem.module.css';
 const { item } = classes;
 
 const FooterItem = (props) => {
-    const { content, link } = props;
+  const { content, link } = props;
 
-    return (
-        <li className={item}>
-            <Link to={link}>
-                {content}
-            </Link>
-        </li>
-    )
+  return (
+    <li className={item}>
+      <Link to={link}>
+        {content}
+      </Link>
+    </li>
+  )
 }
 
 export default FooterItem;

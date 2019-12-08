@@ -17,56 +17,62 @@ const { line } = classesCommon;
 
 export default class SectionPleasure extends Component {
 
-    state = {
-        items: null,
-        loading: true,
-        error: false
-    }
+  state = {
+    items: null,
+    loading: true,
+    error: false
+  }
 
-    componentDidMount() {
-        setTimeout(() => {
-            firebase
-                .database()
-                .ref()
-                .child('goods')
-                .once('value')
-                .then(snapshot => this.setState({ items: snapshot.val() }))
-                .then(() => this.setState({ loading: false }))
-        }, 400);
-    }
-
-    renderItems(items) {
-        return items.map((item, index) => {
-
-            return (
-
-                <div key={index} className={card}>
-                    <BlockItem item={item} />
-                </div>
-            )
+  componentDidMount() {
+    setTimeout(() => {
+      firebase
+        .database()
+        .ref()
+        .child('goods')
+        .once('value')
+        .then(snapshot => {
+          if (snapshot.val()) {
+            this.setState({ items: snapshot.val() })
+          } else {
+            this.setState({ error: true })
+          }
         })
-    }
+        .then(() => this.setState({ loading: false }))
+    }, 400);
+  }
 
-    render() {
+  renderItems(items) {
+    return items.map((item, index) => {
 
-        const { items, loading } = this.state;
+      return (
 
-        const content = loading ? <Spinner /> : this.renderItems(items)
+        <div key={index} className={card}>
+          <BlockItem item={item} />
+        </div>
+      )
+    })
+  }
 
-        return (
-            <section className={shop} >
-                <Container>
-                    <BlockDescription image={Cup__img} />
-                    <div className={line}></div>
-                    <Row>
-                        <Col lg={{ size: '10', offset: 1 }} >
-                            <div className={wrapper}>
-                                {content}
-                            </div>
-                        </Col>
-                    </Row>
-                </Container >
-            </section>
-        )
-    }
+  render() {
+
+    const { items, loading } = this.state;
+
+    const content = loading ? <Spinner /> : this.renderItems(items)
+
+    return (
+      <section className={shop} >
+        <Container>
+          <BlockDescription image={Cup__img} />
+          <div className={line}></div>
+          <Row>
+            <Col lg={{ size: '10', offset: 1 }} >
+              <div className={wrapper}>
+                {content}
+              </div>
+            </Col>
+          </Row>
+        </Container >
+      </section>
+    )
+  }
 }

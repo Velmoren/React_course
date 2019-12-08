@@ -4,13 +4,13 @@ import Footer from '../../footer'
 import SectionShop from './sectionShop';
 
 const OurCoffeePage = () => {
-    return (
-        <>
-            <Banner text={'Our Coffee'} />
-            <SectionShop />
-            <Footer />
-        </>
-    )
+  return (
+    <>
+      <Banner text={'Our Coffee'} />
+      <SectionShop />
+      <Footer />
+    </>
+  )
 }
 
 export default OurCoffeePage;
