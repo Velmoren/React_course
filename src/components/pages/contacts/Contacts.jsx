@@ -189,7 +189,7 @@ class Contacts extends Component {
                         id='phone'
                         name='phone'
                         type="tel"
-                        mask={['(', /[0-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/]}
+                        mask={['+', /\d/, '(', /[0-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/]}
                         guide={true}
                         showMask={true}
                         onChange={this.onValueChange}
