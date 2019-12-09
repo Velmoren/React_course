@@ -1,3 +1,3 @@
-import BlockItem from './blockItem'
+import BlockItem from './BlockItem'
 
 export default BlockItem;

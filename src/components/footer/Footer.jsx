@@ -23,7 +23,7 @@ const Footer = () => {
               <FooterItem content={<img src={logo__black__img} alt="logo" />} link={'/'} />
               <FooterItem content={'Our coffee'} link={'/ourCoffe'} />
               <FooterItem content={'For your pleasure'} link={'/Coffee'} />
-              <FooterItem content={'Contact as'} link={'/Contact'} />
+              <FooterItem content={'Contact as'} link={'/Contacts'} />
             </ul>
           </Col>
         </Row>

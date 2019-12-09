@@ -1,3 +1,3 @@
-import BlockDescription from './blockDescription'
+import BlockDescription from './BlockDescription'
 
 export default BlockDescription;
